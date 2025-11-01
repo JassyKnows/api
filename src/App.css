@@ -20,7 +20,8 @@
   background-color: pink;
 }
 
-.button-handle {
+.button-handle,
+.button-card {
   border-radius: 15px;
   display: flex;
   flex-direction: row;
@@ -33,6 +34,7 @@ button {
   color: white;
   border-radius: 15px;
   width: 100px;
+  height: 40px;
 }
 
 .sorting {
@@ -40,4 +42,18 @@ button {
   justify-content: center;
   align-items: center;
   margin: 20px 0;
+}
+
+.cart-container {
+  width: 60%;
+  margin: 40px auto;
+  background: pink;
+  padding: 25px;
+  border-radius: 16px;
+  box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.15);
+}
+.cart-item {
+  padding: 12px 0;
+  border-bottom: 1px solid #e2e2e2;
+  font-size: 18px;
 }

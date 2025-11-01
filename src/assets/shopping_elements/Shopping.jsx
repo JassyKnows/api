@@ -1,24 +1,9 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import Filtering from './Filtering';
+import React, { useState } from 'react';
 import Sorting from './Sorting';
+import { Link } from 'react-router-dom';
 
-function Shopping({ selectedcategory }) {
-  const [product, setProduct] = useState([]);
+function Shopping({ selectedcategory, product, addToCart, removeFromCart }) {
   const [sorting, setSorting] = useState('');
-
-  useEffect(() => {
-    const axiosData = async () => {
-      try {
-        const res = await axios.get('https://fakestoreapi.com/products');
-        setProduct(res.data);
-        // console.log(res.data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    axiosData();
-  }, []);
 
   const filteringFunction =
     selectedcategory === 'all'
@@ -34,15 +19,27 @@ function Shopping({ selectedcategory }) {
   return (
     <div>
       <Sorting setSorting={setSorting} />
+      <Link to={'/cart'}>
+        <button>Check Cart</button>
+      </Link>
       <div className="shoppingStyle">
         {sortingFunction.map((item) => (
-          <div key={item.id} className="product-card">
+          <div key={item.id}>
             <img src={item.image} alt={item.title} width={100} height={120} />
             <h3>{item.title}</h3>
             <h5>${item.price}</h5>
             <h6>
               {item.rating.rate} ({item.rating.count})
             </h6>
+            <div className="button-card">
+              <Link to={`/productdetails/${item.id}`}>
+                <button>Product Details</button>
+              </Link>
+              <button onClick={() => addToCart(item)}>Add to Cart</button>
+              <button onClick={() => removeFromCart(item.id)}>
+                Remove from Cart
+              </button>
+            </div>
           </div>
         ))}
       </div>
